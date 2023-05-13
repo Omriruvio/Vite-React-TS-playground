@@ -1,0 +1,1 @@
+export const forwardUrl = `https://${import.meta.env.VITE_ENV_BASEURL}`;

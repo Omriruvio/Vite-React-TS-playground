@@ -2,6 +2,8 @@ import axios from 'axios';
 import './App.css';
 import { useEffect, useState } from 'react';
 import { Error } from './components/Error';
+import { forwardUrl } from './config';
+
 
 function App() {
   const [title, setTitle] = useState<string>('');
@@ -9,7 +11,7 @@ function App() {
   const [error, setError] = useState<string | string[]>('');
 
   useEffect(() => {
-    axios.get<string>('https://omriruvio-zany-space-chainsaw-jq7j5pv67w9fq74q-3333.preview.app.github.dev')
+    axios.get<string>(forwardUrl)
       .then(res => setTitle(res.data))
       .catch(err => {
         console.log(err);
@@ -18,10 +20,8 @@ function App() {
       })
   }, []);
 
-  console.log(import.meta.env.VITE_ENV_BASEURL);
-
   const handleClick = async () => {
-    const res = await axios.get<{ message: string }>('https://omriruvio-zany-space-chainsaw-jq7j5pv67w9fq74q-3333.preview.app.github.dev/api/data');
+    const res = await axios.get<{ message: string }>(`${forwardUrl}/api/data`);
     setData((data) => [...data, res.data.message]);
   };
 
