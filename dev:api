@@ -1,0 +1,18 @@
+
+> codespaces-blank@0.0.0 dev
+> vite --port 5173 --host 0.0.0.0
+
+
+  VITE v4.3.5  ready in 212 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://172.16.5.4:5173/
+  ➜  press h to show help
+6:21:46 PM [vite] hmr update /src/App.tsx
+6:21:58 PM [vite] hmr update /src/App.tsx
+6:23:09 PM [vite] hmr update /src/App.tsx
+6:25:13 PM [vite] hmr update /src/App.tsx
+6:25:48 PM [vite] hmr update /src/App.tsx
+6:26:42 PM [vite] hmr update /src/App.tsx
+6:26:43 PM [vite] hmr invalidate /src/App.tsx Could not Fast Refresh (export removed)
+6:26:43 PM [vite] page reload src/App.tsx
