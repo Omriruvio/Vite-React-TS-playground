@@ -1,0 +1,64 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+	"name": "Node.js & TypeScript",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:0-20",
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+			"plugins": "ssh-agent npm",
+			"omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions",
+			"username": "root"
+		},
+		"ghcr.io/devcontainers/features/github-cli:1": {
+			"installDirectlyFromGitHubRelease": true,
+			"version": "latest"
+		}
+	},
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [
+		5173,
+		3333
+	],
+	"portsAttributes": {
+		"3333": {
+			"label": "Server",
+			"onAutoForward": "notify"
+		},
+		"5173": {
+			"label": "Web",
+			"onAutoForward": "openPreview"
+		}
+	},
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "npm install",
+	"postAttachCommand": {
+		"apiServer": "npm run dev:api",
+		// "webServer": "VITE_ENV_BASEURL=\"$CODESPACE_NAME.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN\" npm run dev",
+		"webServer": "VITE_ENV_BASEURL=\"$CODESPACE_NAME-3333.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN\" npm run dev",
+		"setPortVisibility": "gh codespace ports visibility 3333:public -c $CODESPACE_NAME"
+	},
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"GitHub.copilot",
+				"esbenp.prettier-vscode"
+			],
+			"settings": {
+				"editor.formatOnSave": true,
+				"files.autoSave": "off",
+				"editor.tabSize": 2,
+				"editor.action.deleteLines": {
+					"key": "ctrl+alt+k",
+					"mac": "cmd+alt+k"
+				}
+			}
+		}
+	}
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+
+}
