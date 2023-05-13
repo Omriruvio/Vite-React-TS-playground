@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react';
 import { Error } from './components/Error';
 import { forwardUrl } from './config';
 
+
 function App() {
   const [title, setTitle] = useState<string>('');
   const [data, setData] = useState<string[]>([]);
   const [error, setError] = useState<string | string[]>('');
-  
+
   useEffect(() => {
     axios.get<string>(forwardUrl)
       .then(res => setTitle(res.data))
