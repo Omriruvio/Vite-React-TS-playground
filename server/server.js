@@ -17,7 +17,7 @@ app.get('/api/data', (req, res) => {
 
 app.get('/', async (req, res) => {
   await new Promise(resolve => setTimeout(resolve, 0));
-  res.send('Title from server');
+  res.send('Slow Server Response Test');
 })
 
 app.listen(3333, () => {
