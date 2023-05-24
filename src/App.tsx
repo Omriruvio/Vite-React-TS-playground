@@ -11,6 +11,7 @@ function App() {
   const [data, setData] = useState<string[]>([]);
   const [error, setError] = useState<string | string[]>('');
   const [ignoredResponses, setIgnoredResponses] = useState<string[]>([]);
+  const DEBOUNCE_TIME = 1000;
 
   useEffect(() => {
     axios.get<string>(forwardUrl)
@@ -38,7 +39,7 @@ function App() {
       console.log(err);
       setData((data) => [...data, 'Error']);
     }
-  }, 1000);
+  }, DEBOUNCE_TIME);
 
   const handleClick = () => {
     makeRequest();
@@ -48,14 +49,17 @@ function App() {
     <div>
       <Error text={error} />
       <h1>{title}</h1>
-      <button onClick={handleClick}>Make Request</button>
-      <div style={{ position: 'fixed', bottom: 0, left: 0, padding: '1rem', border: '1px solid white', color: 'white' }}>
+      <p style={{ color: 'aqua' }}>The button makes a {DEBOUNCE_TIME} ms debounced request, and only processes the last response.</p>
+      <p style={{ color: 'aqua' }}>Click the button with delays over {DEBOUNCE_TIME} ms to see the ignored responses.</p>
+      <p style={{ color: 'aqua' }}>Server processing time is set to 5 seconds.</p>
+      <button onClick={handleClick} style={{ marginTop: '50px' }}>Make Request</button>
+      <div style={{ position: 'fixed', bottom: 0, left: 0, padding: '1rem', border: '1px solid white', color: 'white', width: '33%', minHeight: '200px' }}>
         <h2 style={{ marginTop: '2rem' }}>Processed Responses</h2>
         {data.map((d, i) => <div key={i}>{d}</div>)}
       </div>
-      <div style={{ position: 'fixed', bottom: 0, right: 0, padding: '1rem', border: '1px solid white', color: 'white' }}>
+      <div style={{ position: 'fixed', bottom: 0, right: 0, padding: '1rem', border: '1px solid white', color: 'white', width: '33%', minHeight: '200px' }}>
         <h2>Ignored Responses</h2>
-        {ignoredResponses.map((d, i) => <div key={i}>{d}</div>)}
+        {ignoredResponses.map((d, i) => <div key={i} style={{ textDecoration: 'line-through' }}>{d}</div>)}
       </div>
 
     </div>
