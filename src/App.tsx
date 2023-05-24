@@ -22,7 +22,7 @@ function App() {
       })
   }, []);
 
-  const currentRequest = useRef(null);
+  const currentRequest = useRef<string | null>(null);
   const makeRequest = _.debounce(async () => {
     const requestId = _.uniqueId();
     currentRequest.current = requestId;
@@ -41,7 +41,7 @@ function App() {
   }, 1000);
 
   const handleClick = () => {
-    makeRequest('test');
+    makeRequest();
   };
 
   return (
