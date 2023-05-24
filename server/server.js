@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 app.get('/api/data', (req, res) => {
   setTimeout(() => {
     res.json({ message: 'Hello from server.' });
-  }, 777);
+  }, 5000);
 });
 
 app.get('/', async (req, res) => {
